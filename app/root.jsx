@@ -57,9 +57,9 @@ function Document({ children }) {
       <body>
         <Header />
         {children}
-<Footer/>
+        <Footer />
         <Scripts />
-        <LiveReload/>
+        <LiveReload />
       </body>
     </html>
   );
