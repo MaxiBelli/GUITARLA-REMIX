@@ -5,9 +5,8 @@ export default function Guitar({ guitar }) {
 
   return (
     <div className="guitar">
-      <img
-        src={image.data.attributes.formats.thumbnail
-          .url}
+      <img 
+        src={image.data.attributes.formats.medium.url}
         alt={`Guitar img ${name}`}
       />
       <div className="content">
