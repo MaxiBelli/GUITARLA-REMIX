@@ -1,14 +1,12 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, Outlet } from "@remix-run/react";
 import { getGuitars } from "~/models/guitars.server";
 import GuitarList from "~/components/guitarList";
 import styles from "~/styles/guitars.css";
 
 export function meta() {
   return [
-    {
-      title: "GuitarLA - Guitar Shop",
-      description: "GuitarLA - Our collection of guitars",
-    },
+    { title: "GuitarLA - Guitar Store" },
+    { description: "GuitarLA - Our collection of guitars" },
   ];
 }
 
@@ -28,10 +26,11 @@ export async function loader() {
 
 function Store() {
   const guitars = useLoaderData();
-  console.log(guitars);
+
   return (
-    <main className="conteiner">
+    <main className="container">
       <GuitarList guitars={guitars} />
+      <Outlet />
     </main>
   );
 }

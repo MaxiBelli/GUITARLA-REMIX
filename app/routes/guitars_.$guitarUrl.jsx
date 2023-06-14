@@ -1,15 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
 import { getGuitar } from "~/models/guitars.server";
-import styles from "~/styles/guitars.css";
-
-export function links() {
-  return [
-    {
-      rel: "stylesheet",
-      href: styles,
-    },
-  ];
-}
 
 export async function loader({ params }) {
   const { guitarUrl } = params;
@@ -27,16 +17,20 @@ export async function loader({ params }) {
 
 export function meta({ data }) {
   if (!data) {
-    return {
-      title: "GuitarLA - Guitar Not Found",
-      description: "Guitars, guitar sales, guitar not found",
-    };
+    return [
+      {
+        title: "GuitarLA - Guitar Not Found",
+        description: "Guitars, guitar sales, guitar not found",
+      },
+    ];
   }
 
-  return {
-    title: `GuitarLA - ${data?.data[0]?.attributes.name}`,
-    description: `Guitars, guitar sales, ${data.data[0].attributes.name} guitar`,
-  };
+  return [
+    {
+      title: `GuitarLA - ${data?.data[0]?.attributes.name}`,
+      description: `Guitars, guitar sales, ${data.data[0].attributes.name} guitar`,
+    },
+  ];
 }
 
 function Guitar() {
@@ -44,7 +38,7 @@ function Guitar() {
   const { name, description, image, price } = guitar.data[0].attributes;
 
   return (
-    <main className="guitar">
+    <div className="guitar">
       <img
         className="image"
         src={image.data.attributes.url}
@@ -56,7 +50,7 @@ function Guitar() {
         <p className="text">{description}</p>
         <p className="price">${price}</p>
       </div>
-    </main>
+    </div>
   );
 }
 

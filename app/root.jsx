@@ -4,7 +4,7 @@ import {
   Outlet,
   Scripts,
   LiveReload,
-  useCatch,
+  useRouteError,
   Link,
 } from "@remix-run/react";
 import styles from "~/styles/index.css";
@@ -74,27 +74,16 @@ function Document({ children }) {
 }
 
 /** Error handling */
-export function CatchBoundary() {
-  const error = useCatch();
-  return (
-    <Document>
-      <p className="error">
-        {error.status} {error.statusText}
-      </p>
-      <Link className="error-enlace" to="/">
-        Maybe you want to return to the main page
-      </Link>
-    </Document>
-  );
-}
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary() {
+  const error = useRouteError();
+
   return (
     <Document>
       <p className="error">
         {error.status} {error.statusText}
       </p>
-      <Link className="error-enlace" to="/">
+      <Link className="error-link" to="/">
         Maybe you want to return to the main page
       </Link>
     </Document>
