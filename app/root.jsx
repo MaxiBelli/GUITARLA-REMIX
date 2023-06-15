@@ -49,10 +49,8 @@ export function links() {
 }
 
 export default function App() {
-
   const [cart, setCart] = useState([]);
 
-  
   const addToCart = (guitar) => {
     if (cart.some((guitarState) => guitarState.children === guitar.id)) {
       const updatedCart = cart.map((guitarState) => {
@@ -69,8 +67,7 @@ export default function App() {
 
   return (
     <Document>
-      <Outlet 
-      context={ addToCart }/>
+      <Outlet context={{ addToCart, cart }} />
     </Document>
   );
 }
