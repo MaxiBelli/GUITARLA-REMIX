@@ -39,6 +39,23 @@ function Guitar() {
   const guitar = useLoaderData();
   const { name, description, image, price } = guitar.data[0].attributes;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (quantity < 1) {
+      alert("You must select a quantity");
+      return;
+    }
+    const selectedGuitar = {
+      id: guitar.data[0].id,
+      image: image.data.attributes.url,
+      name,
+      price,
+      quantity,
+    };
+
+    console.log(selectedGuitar);
+  };
+
   return (
     <div className="guitar">
       <img
@@ -52,7 +69,7 @@ function Guitar() {
         <p className="text">{description}</p>
         <p className="price">${price}</p>
 
-        <form className="form">
+        <form onSubmit={handleSubmit} className="form">
           <label htmlFor="quantity">Quantity</label>
           <select id="quantity" onChange={(e) => setQuantity(+e.target.value)}>
             <option value="0">-- Select --</option>
