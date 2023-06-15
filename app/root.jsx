@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Meta,
   Links,
@@ -48,9 +49,28 @@ export function links() {
 }
 
 export default function App() {
+
+  const [cart, setCart] = useState([]);
+
+  
+  const addToCart = (guitar) => {
+    if (cart.some((guitarState) => guitarState.children === guitar.id)) {
+      const updatedCart = cart.map((guitarState) => {
+        if (guitarState.id === guitar.id) {
+          guitarState.quantity = guitar.quantity;
+        }
+        return guitarState;
+      });
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, guitar]);
+    }
+  };
+
   return (
     <Document>
-      <Outlet />
+      <Outlet 
+      context={ addToCart }/>
     </Document>
   );
 }
