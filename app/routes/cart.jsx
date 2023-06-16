@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useOutletContext } from "@remix-run/react";
 import styles from "~/styles/cart.css";
 
@@ -19,7 +20,17 @@ export function meta() {
 }
 
 function Cart() {
+  const [total, setTotal] = useState(0);
   const { cart, updateQuantity } = useOutletContext();
+
+  useEffect(() => {
+    const calculateTotal = cart.reduce(
+      (total, product) => total + product.quantity * product.price,
+      0
+    );
+    setTotal(calculateTotal);
+  }, [cart]);
+
   return (
     <main className="container">
       <h1 className="heading">Shopping Cart</h1>
@@ -68,7 +79,7 @@ function Cart() {
         </div>
         <aside className="summary">
           <h3>Order Summary</h3>
-          <p>Total to pay: $</p>
+          <p>Total to pay: ${total}</p>
         </aside>
       </div>
     </main>
