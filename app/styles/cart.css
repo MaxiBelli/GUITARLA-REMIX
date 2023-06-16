@@ -70,3 +70,14 @@
     position: sticky;
     top: 3rem;
 }
+
+.btn_delete {
+    all: unset;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+}
+
+.btn_delete:hover {
+    cursor: pointer;
+}
