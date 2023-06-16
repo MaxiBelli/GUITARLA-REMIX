@@ -14,11 +14,9 @@ import Footer from "~/components/footer";
 
 export function meta() {
   return [
-    {
-      charset: "utf-8",
-      title: "GuitarLA - Remix",
-      viewport: "width=device-width,initial-scale=1",
-    },
+    { charset: "utf-8" },
+    { title: "GuitarLA - Remix" },
+    { viewport: "width=device-width,initial-scale=1" },
   ];
 }
 
@@ -27,6 +25,10 @@ export function links() {
     {
       rel: "stylesheet",
       href: "https://necolas.github.io/normalize.css/8.0.1/normalize.css",
+    },
+    {
+      rel: "stylesheet",
+      href: styles,
     },
     {
       rel: "preconnect",
@@ -40,10 +42,6 @@ export function links() {
     {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap",
-    },
-    {
-      rel: "stylesheet",
-      href: styles,
     },
   ];
 }
@@ -104,7 +102,7 @@ export default function App() {
 
 function Document({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <Meta />
         <Links />
@@ -120,18 +118,16 @@ function Document({ children }) {
   );
 }
 
-/** Error handling */
-
 export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
     <Document>
       <p className="error">
-        {error.status} {error.statusText}
+        {error.status} {error.statusText}{" "}
       </p>
-      <Link className="error-link" to="/">
-        Maybe you want to return to the main page
+      <Link className="error-enlace" to="/">
+        Maybe you want to go back to the main page
       </Link>
     </Document>
   );

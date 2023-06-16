@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useLoaderData , useOutletContext} from "@remix-run/react";
+import { useLoaderData, useOutletContext } from "@remix-run/react";
 import { getGuitar } from "~/models/guitars.server";
+import styles from "~/styles/guitars.css";
 
 export async function loader({ params }) {
   const { guitarUrl } = params;
@@ -9,7 +10,7 @@ export async function loader({ params }) {
   if (guitar.data.length === 0) {
     throw new Response("", {
       status: 404,
-      statusText: "Guitar Not Found",
+      statusText: "Guitar not found",
     });
   }
 
@@ -19,23 +20,29 @@ export async function loader({ params }) {
 export function meta({ data }) {
   if (!data) {
     return [
-      {
-        title: "GuitarLA - Guitar Not Found",
-        description: "Guitars, guitar sales, guitar not found",
-      },
+      { title: "GuitarLA - Guitar not found" },
+      { description: "Guitars, guitar sales, guitar not found" },
     ];
   }
 
   return [
+    { title: `GuitarLA - ${data.data[0].attributes.name}` },
     {
-      title: `GuitarLA - ${data?.data[0]?.attributes.name}`,
       description: `Guitars, guitar sales, ${data.data[0].attributes.name} guitar`,
     },
   ];
 }
 
-function Guitar() {
+export function links() {
+  return [
+    {
+      rel: "stylesheet",
+      href: styles,
+    },
+  ];
+}
 
+function Guitar() {
   const { addToCart } = useOutletContext();
   const [quantity, setQuantity] = useState(0);
   const guitar = useLoaderData();
@@ -59,18 +66,16 @@ function Guitar() {
   };
 
   return (
-    <div className="guitar">
+    <main className="container guitar">
       <img
-        className="image"
         src={image.data.attributes.url}
-        alt={`Image of the ${name} guitar`}
+        alt={`Image of ${name} guitar`}
+        className="image"
       />
-
       <div className="content">
         <h3>{name}</h3>
         <p className="text">{description}</p>
         <p className="price">${price}</p>
-
         <form onSubmit={handleSubmit} className="form">
           <label htmlFor="quantity">Quantity</label>
           <select id="quantity" onChange={(e) => setQuantity(+e.target.value)}>
@@ -84,7 +89,7 @@ function Guitar() {
           <input type="submit" value="Add to Cart" />
         </form>
       </div>
-    </div>
+    </main>
   );
 }
 

@@ -19,7 +19,7 @@ export async function loader({ params }) {
 export function meta({ data }) {
   if (!data) {
     return [
-      { title: "GuitarLA - Entry Not Found" },
+      { title: "GuitarLA - Entry not found" },
       { description: "Guitars, guitar blog, entry not found" },
     ];
   }
@@ -27,7 +27,7 @@ export function meta({ data }) {
   return [
     { title: `GuitarLA - ${data.data[0].attributes.title}` },
     {
-      description: `Guitars, guitar blog, entry ${data.data[0].attributes.title}`,
+      description: `Guitars, guitar blog, ${data.data[0].attributes.title} entry`,
     },
   ];
 }
