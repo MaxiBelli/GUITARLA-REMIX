@@ -65,9 +65,25 @@ export default function App() {
     }
   };
 
+  const updateQuantity = (guitar) => {
+    const updatedCart = cart.map((guitarState) => {
+      if (guitarState.id === guitar.id) {
+        guitarState.quantity = guitar.quantity;
+      }
+      return guitarState;
+    });
+    setCart(updatedCart);
+  };
+
   return (
     <Document>
-      <Outlet context={{ addToCart, cart }} />
+      <Outlet
+        context={{
+          addToCart,
+          cart,
+          updateQuantity,
+        }}
+      />
     </Document>
   );
 }

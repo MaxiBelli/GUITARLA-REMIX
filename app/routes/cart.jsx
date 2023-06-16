@@ -19,13 +19,13 @@ export function meta() {
 }
 
 function Cart() {
-  const { cart } = useOutletContext();
+  const { cart, updateQuantity } = useOutletContext();
   return (
     <main className="container">
       <h1 className="heading">Shopping Cart</h1>
       <div className="content">
         <div className="cart">
-          <h2>Articles</h2>
+          <h2>Items</h2>
           {cart?.length === 0
             ? "Empty Cart"
             : cart?.map((product) => (
@@ -38,8 +38,23 @@ function Cart() {
                   </div>
                   <div>
                     <p className="name">{product.name}</p>
-                    <p>Quantity:{product.quantity} </p>
-
+                    <p>Quantity: </p>
+                    <select
+                      value={product.quantity}
+                      className="select"
+                      onChange={(e) =>
+                        updateQuantity({
+                          quantity: +e.target.value,
+                          id: product.id,
+                        })
+                      }
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
                     <p className="price">
                       $ <span>{product.price}</span>
                     </p>
